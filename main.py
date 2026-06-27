@@ -1,9 +1,18 @@
+import os
 import sys
-from PyQt5.QtWidgets import QApplication
-from src.windrose.windrose_app import WindRoseApp
+
+# Ensure matplotlib binds to PySide6 (not PyQt5) for its Qt backend.
+os.environ.setdefault("QT_API", "pyside6")
+
+from PySide6.QtWidgets import QApplication
+
+from src.ui import MainWindow
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = WindRoseApp()
+    app.setStyle('Fusion')
+    app.setApplicationName("Wind Rose Generator")
+    app.setApplicationVersion("1.0.0")
+    window = MainWindow()
     window.show()
-    sys.exit(app.exec_()) 
+    sys.exit(app.exec())

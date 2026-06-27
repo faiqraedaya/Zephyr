@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QLabel, QDoubleSpinBox
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QDoubleSpinBox
 
 class SpeedRangeWidget(QWidget):
     def __init__(self, parent=None):

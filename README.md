@@ -1,62 +1,77 @@
 # Wind Rose Generator
 
 ## Overview
-A Python-based application for generating highly-customizable wind rose diagrams from large meteorological dataset.
+A Python desktop application for generating highly-customizable wind rose diagrams
+from meteorological datasets stored in Excel.
 
 ## Features
-- Interactive GUI built with PyQt5
-- Load and process wind data from Excel files
-- Customizable wind direction bins (4-36 sectors)
-- Adjustable wind speed categories (2-10 ranges)
-- Date range filtering
-- Real-time wind rose visualization
-- Export capabilities:
-  - Wind rose image
-  - Frequency table
-  - XML data format
-
-## Requirements
-- Python 3.7+
-- [pandas](https://pandas.pydata.org/)
-- [PyQt5](https://pypi.org/project/PyQt5/)
-- [matplotlib](https://matplotlib.org/)
-- [numpy](https://numpy.org/)
+- Interactive GUI built with **PySide6**
+- Load and process wind data from Excel files, with configurable column mapping,
+  row range, and date format
+- Robust data handling: non-numeric values are coerced and excluded (and reported),
+  bad dates are dropped, and missing columns are reported instead of crashing
+- Customizable wind direction bins (4–36 sectors) and wind speed categories (2–10 ranges)
+- Correct meteorological conventions: direction is the direction the wind blows
+  *from*, North is at the top, angles increase clockwise, and the North sector
+  spans across 0°/360°
+- Separate **calm** accounting (low-speed, undefined-direction observations) so all
+  frequencies sum to 100%
+- Selectable colour schemes and inclusive date-range filtering
+- Real-time wind rose visualization with a summary panel (prevailing direction,
+  average speed, calm %, observation counts)
+- Export the wind rose image (PNG/JPEG), the frequency table (Excel or CSV), and an
+  XML data format
 
 ## Installation
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/faiqraedaya/Wind-Rose-Generator
-   cd "WindRoseGenerator"
-   ```
-2. **Install dependencies:**
-   ```bash
-   pip install PyQt5 matplotlib pandas numpy
-   ```
+```bash
+git clone https://github.com/faiqraedaya/Wind-Rose-Generator
+cd Wind-Rose-Generator
+uv sync
+```
 
 ## Usage
-1. **Launch the application:**
-```bash
-python main.py
-```
+1. Run the application:
+   ```bash
+   uv run main.py
+   ```
+
 2. Load your wind data:
-   - Click "Load Excel File" to select your data file
-   - Configure the data columns (date/time, wind speed, wind direction)
-   - Set the appropriate date format
+   - Use **File → Open Excel File** to select your data file
+   - Configure the data columns (date/time, wind speed in m/s, wind direction in degrees)
+   - Set the appropriate date format (e.g. `yyyy-MM-dd HH:mm:ss`)
 
 3. Customize the visualization:
-   - Adjust the number of direction bins
-   - Modify wind speed categories
-   - Select the desired date range
+   - Adjust the number of direction bins and speed categories
+   - Configure the speed ranges (boundaries must be strictly increasing; speeds
+     below the lowest category are treated as calm)
+   - Choose a colour scheme and the date range
 
 4. Generate and export:
-   - Click "Update Wind Rose" to refresh the visualization
-   - Use the export buttons to save the results in your preferred format
+   - Click **Update Wind Rose** to refresh the visualization
+   - Use the **Export** menu to save the image, frequency table (Excel/CSV), or XML
 
-## Data Format
-The application expects Excel files with the following columns:
-- Date/Time column
-- Wind Speed column (in m/s)
-- Wind Direction column (in degrees)
+## Project Structure
+```
+main.py                     Thin launcher (PySide6 QApplication)
+src/
+  core/                     GUI-independent engine (importable & testable alone)
+    constants.py            Units, compass names, defaults, colour schemes
+    data_loader.py          Excel -> tidy DataFrame, validation (raises DataError)
+    statistics.py           Direction/speed binning and frequency statistics
+    export.py               Image-independent serialization (XML)
+  ui/                       PySide6 GUI (depends on core; never the reverse)
+    main_window.py          Assembles widgets and orchestrates core + canvas
+    rose_canvas.py          Matplotlib canvas widget + wind-rose plotting
+    data_config_widget.py   Column / row / date-format inputs
+    speed_range_widget.py   A single speed-category min/max input row
+```
+
+The `core` package contains no GUI imports, so the binning/statistics engine can be
+used and tested with a synthetic `pandas` DataFrame independently of the UI.
+
+## Requirements
+- Python ≥ 3.13
+- PySide6, matplotlib, pandas, numpy, openpyxl (installed via `uv sync`)
 
 ## License
-This project is provided under the MIT License.
+[MIT](LICENSE)

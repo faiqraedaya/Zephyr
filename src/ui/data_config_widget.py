@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QFormLayout, QLineEdit, QSpinBox, QLabel
+from PySide6.QtWidgets import QWidget, QFormLayout, QLineEdit, QSpinBox, QLabel
 
 class DataConfigWidget(QWidget):
     def __init__(self, parent=None):
@@ -25,7 +25,7 @@ class DataConfigWidget(QWidget):
         self.date_format_help.setWordWrap(True)
         
         # Add widgets to layout
-        layout.addRow("Date \& Time Column:", self.date_time_col)
+        layout.addRow("Date && Time Column:", self.date_time_col)
         layout.addRow("Wind Speed Column:", self.wind_speed_col)
         layout.addRow("Wind Direction Column:", self.wind_dir_col)
         layout.addRow("First Data Row:", self.first_row)
