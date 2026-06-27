@@ -1,6 +1,5 @@
 # Wind Rose Generator
 
-## Overview
 A Python desktop application for generating highly-customizable wind rose diagrams
 from meteorological datasets stored in Excel.
 
