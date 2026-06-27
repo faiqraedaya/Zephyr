@@ -12,7 +12,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setStyle('Fusion')
     app.setApplicationName("Wind Rose Generator")
-    app.setApplicationVersion("1.0.0")
+    app.setApplicationVersion("2.0.0")
     window = MainWindow()
     window.show()
     sys.exit(app.exec())

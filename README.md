@@ -50,28 +50,5 @@ uv sync
    - Click **Update Wind Rose** to refresh the visualization
    - Use the **Export** menu to save the image, frequency table (Excel/CSV), or XML
 
-## Project Structure
-```
-main.py                     Thin launcher (PySide6 QApplication)
-src/
-  core/                     GUI-independent engine (importable & testable alone)
-    constants.py            Units, compass names, defaults, colour schemes
-    data_loader.py          Excel -> tidy DataFrame, validation (raises DataError)
-    statistics.py           Direction/speed binning and frequency statistics
-    export.py               Image-independent serialization (XML)
-  ui/                       PySide6 GUI (depends on core; never the reverse)
-    main_window.py          Assembles widgets and orchestrates core + canvas
-    rose_canvas.py          Matplotlib canvas widget + wind-rose plotting
-    data_config_widget.py   Column / row / date-format inputs
-    speed_range_widget.py   A single speed-category min/max input row
-```
-
-The `core` package contains no GUI imports, so the binning/statistics engine can be
-used and tested with a synthetic `pandas` DataFrame independently of the UI.
-
-## Requirements
-- Python ≥ 3.13
-- PySide6, matplotlib, pandas, numpy, openpyxl (installed via `uv sync`)
-
 ## License
 [MIT](LICENSE)
