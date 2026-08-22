@@ -494,8 +494,8 @@ wheels = [
 
 [[package]]
 name = "wind-rose-generator"
-version = "1.0.0"
-source = { virtual = "." }
+version = "2.0.0"
+source = { editable = "." }
 dependencies = [
     { name = "matplotlib" },
     { name = "numpy" },

@@ -14,10 +14,10 @@ from PySide6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
 from PySide6.QtGui import QAction
 from matplotlib import colormaps
 
-from src.core import constants, data_loader, statistics, export
-from src.ui.rose_canvas import RoseCanvas
-from src.ui.speed_range_widget import SpeedRangeWidget
-from src.ui.data_config_widget import DataConfigWidget
+from wind_rose_generator.core import constants, data_loader, statistics, export
+from wind_rose_generator.ui.rose_canvas import RoseCanvas
+from wind_rose_generator.ui.speed_range_widget import SpeedRangeWidget
+from wind_rose_generator.ui.data_config_widget import DataConfigWidget
 
 
 class MainWindow(QMainWindow):

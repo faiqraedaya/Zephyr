@@ -3,9 +3,9 @@
 This package never imports any GUI toolkit, so it can be imported and tested
 on its own with a synthetic DataFrame.
 """
-from src.core import constants
-from src.core.data_loader import DataError, load_excel, process_data, qt_to_strftime
-from src.core.statistics import (
+from wind_rose_generator.core import constants
+from wind_rose_generator.core.data_loader import DataError, load_excel, process_data, qt_to_strftime
+from wind_rose_generator.core.statistics import (
     assign_sectors,
     compass_name,
     compute_wind_rose,
@@ -15,7 +15,7 @@ from src.core.statistics import (
     speed_edges_from_ranges,
     speed_labels,
 )
-from src.core.export import wind_rose_to_xml_tree
+from wind_rose_generator.core.export import wind_rose_to_xml_tree
 
 __all__ = [
     "constants",

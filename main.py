@@ -6,7 +6,7 @@ os.environ.setdefault("QT_API", "pyside6")
 
 from PySide6.QtWidgets import QApplication
 
-from src.ui import MainWindow
+from wind_rose_generator.ui import MainWindow
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

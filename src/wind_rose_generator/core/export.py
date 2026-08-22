@@ -7,7 +7,7 @@ serialization, which has a bespoke schema.
 """
 import xml.etree.ElementTree as ET
 
-from src.core.statistics import frequency_table
+from wind_rose_generator.core.statistics import frequency_table
 
 
 def wind_rose_to_xml_tree(result, velocity_bands):
