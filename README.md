@@ -1,27 +1,19 @@
 # Wind Rose Generator
 
-A Python desktop application for generating highly-customizable wind rose diagrams
-from meteorological datasets stored in Excel.
+## Overview
+*Wind Rose Generator is a desktop application that builds wind rose diagrams and frequency tables from meteorological data in Excel. It turns time series of wind speed and direction into a configurable, self-describing wind rose for reports and studies.*
 
 ## Features
-- Interactive GUI built with **PySide6**
-- Load and process wind data from Excel files, with configurable column mapping,
-  row range, and date format
-- Robust data handling: non-numeric values are coerced and excluded (and reported),
-  bad dates are dropped, and missing columns are reported instead of crashing
-- Customizable wind direction bins (4–36 sectors) and wind speed categories (2–10 ranges)
-- Correct meteorological conventions: direction is the direction the wind blows
-  *from*, North is at the top, angles increase clockwise, and the North sector
-  spans across 0°/360°
-- Separate **calm** accounting (low-speed, undefined-direction observations) so all
-  frequencies sum to 100%
-- Selectable colour schemes and inclusive date-range filtering
-- Real-time wind rose visualization with a summary panel (prevailing direction,
-  average speed, calm %, observation counts)
-- Export the wind rose image (PNG/JPEG), the frequency table (Excel or CSV), and an
-  XML data format
+- Excel import with column mapping from the workbook's own headings, a row range and a date format
+- Non-numeric values and unparseable dates excluded and reported
+- 4 to 36 direction sectors and 2 to 10 speed categories, validated as they are entered
+- Meteorological convention: direction the wind blows from, North at the top, clockwise angles
+- Calm observations counted separately, so all frequencies sum to 100 %
+- Inclusive date-range filtering and a choice of sequential colour schemes
+- Diagram footnote with source, period, observation counts, prevailing direction, mean speed and calm share
+- Export of the diagram to PNG or JPEG and the frequency table to Excel, CSV or XML
 
-## Installation
+## Install
 ```bash
 git clone https://github.com/faiqraedaya/Wind-Rose-Generator
 cd Wind-Rose-Generator
@@ -29,25 +21,17 @@ uv sync
 ```
 
 ## Usage
-1. Run the application:
-   ```bash
-   uv run main.py
-   ```
+```bash
+uv run wind-rose-generator
+```
+On the Data page, click Choose Excel file, map the date, speed (m/s) and direction (degrees) columns, and click Load data. On the Wind rose page, click Update wind rose. Use the Export menu to save the diagram or the frequency table. `uv run main.py` starts the same application from a source checkout.
 
-2. Load your wind data:
-   - Use **File → Open Excel File** to select your data file
-   - Configure the data columns (date/time, wind speed in m/s, wind direction in degrees)
-   - Set the appropriate date format (e.g. `yyyy-MM-dd HH:mm:ss`)
+## Technical details
+Input is an Excel workbook read with pandas. Each row needs a date and time, a wind speed in m/s and a wind direction in degrees. Dates are parsed with the configured format, falling back to pandas inference. Speed and direction are coerced to numbers, and non-finite values are excluded and counted.
 
-3. Customize the visualization:
-   - Adjust the number of direction bins and speed categories
-   - Configure the speed ranges (boundaries must be strictly increasing; speeds
-     below the lowest category are treated as calm)
-   - Choose a colour scheme and the date range
+Each direction is assigned to a sector centred on its compass bearing, with the North sector spanning 0°/360°. Speeds below the first speed boundary count as calm, and the top speed category is open-ended. Frequencies are percentages of all valid observations, so the petals and the calm share together sum to 100 %. The rose is drawn with Matplotlib on a polar axis. Speed bands use a sequential colour scale, either the application's own or a Matplotlib colour map.
 
-4. Generate and export:
-   - Click **Update Wind Rose** to refresh the visualization
-   - Use the **Export** menu to save the image, frequency table (Excel/CSV), or XML
+The diagram exports as PNG or JPEG. The frequency table (speed category against direction sector, in percent) exports as Excel or CSV. The XML export holds the calm fraction, velocity bands, sector directions and per-heading probabilities as fractions.
 
 ## License
-[MIT](LICENSE)
+MIT — see [LICENSE](LICENSE).
