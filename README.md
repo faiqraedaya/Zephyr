@@ -1,7 +1,9 @@
-# Wind Rose Generator
+<img src="src/zephyr/gui/assets/zephyr.svg" alt="Zephyr icon" width="64">
+
+# Zephyr
 
 ## Overview
-*Wind Rose Generator is a desktop application that builds wind rose diagrams and frequency tables from meteorological data in Excel. It turns time series of wind speed and direction into a configurable, self-describing wind rose for reports and studies.*
+*Zephyr is a desktop application that builds wind rose diagrams and frequency tables from meteorological data in Excel. It turns time series of wind speed and direction into a configurable, self-describing wind rose for reports and studies.*
 
 ## Features
 - Excel import with column mapping from the workbook's own headings, a row range and a date format
@@ -15,16 +17,16 @@
 
 ## Install
 ```bash
-git clone https://github.com/faiqraedaya/Wind-Rose-Generator
-cd Wind-Rose-Generator
+git clone https://github.com/faiqraedaya/Zephyr
+cd Zephyr
 uv sync
 ```
 
 ## Usage
 ```bash
-uv run wind-rose-generator
+uv run zephyr
 ```
-On the Data page, click Choose Excel file, map the date, speed (m/s) and direction (degrees) columns, and click Load data. On the Wind rose page, click Update wind rose. Use the Export menu to save the diagram or the frequency table. `uv run main.py` starts the same application from a source checkout.
+On the Data page, click Choose Excel file, map the date, speed (m/s) and direction (degrees) columns, and click Load data. On the Wind rose page, click Update wind rose. Use the Export menu to save the diagram or the frequency table.
 
 ## Technical details
 Input is an Excel workbook read with pandas. Each row needs a date and time, a wind speed in m/s and a wind direction in degrees. Dates are parsed with the configured format, falling back to pandas inference. Speed and direction are coerced to numbers, and non-finite values are excluded and counted.

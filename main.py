@@ -1,18 +1,10 @@
-import os
+"""Launcher for a source checkout: ``uv run main.py``."""
 import sys
+from pathlib import Path
 
-# Ensure matplotlib binds to PySide6 (not PyQt5) for its Qt backend.
-os.environ.setdefault("QT_API", "pyside6")
+sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-from PySide6.QtWidgets import QApplication
+from zephyr.app import main
 
-from wind_rose_generator.ui import MainWindow
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    app.setStyle('Fusion')
-    app.setApplicationName("Wind Rose Generator")
-    app.setApplicationVersion("2.0.0")
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec())
+if __name__ == "__main__":
+    sys.exit(main())

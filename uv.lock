@@ -493,7 +493,7 @@ wheels = [
 ]
 
 [[package]]
-name = "wind-rose-generator"
+name = "zephyr"
 version = "2.0.0"
 source = { editable = "." }
 dependencies = [

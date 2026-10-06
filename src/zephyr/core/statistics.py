@@ -6,7 +6,7 @@ frequency table. They are pure and testable with a synthetic DataFrame.
 import numpy as np
 import pandas as pd
 
-from wind_rose_generator.core.constants import COMPASS_NAMES
+from zephyr.core.constants import COMPASS_NAMES
 
 
 def sector_centers(n_sectors):
